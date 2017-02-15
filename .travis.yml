@@ -12,7 +12,12 @@ matrix:
 cache:
   - pip
   - directories:
-      - .cask/
+      # Cache stable Emacs binaries
+      - "$HOME/emacs/"
+      # Cache Flycheck dependencies
+      - ".cask/"
+      # Cache Cask bootstrap dependencies
+      - "$HOME/.emacs.d/.cask"
 env:
   matrix:
     - EMACS_VERSION=24.4
@@ -25,7 +30,7 @@ env:
     - LINT_PYTHON=yes
 before_install:
   - export PATH="$HOME/bin:$PATH"
-  - wget 'https://raw.githubusercontent.com/flycheck/emacs-travis/master/emacs-travis.mk'
+  - wget 'https://raw.githubusercontent.com/flycheck/emacs-travis/cache-stable-emacs/emacs-travis.mk'
   - if [[ -n $EMACS_VERSION ]]; then make -f emacs-travis.mk install_emacs; fi
   - if [[ -n $EMACS_VERSION ]]; then make -f emacs-travis.mk install_cask; fi
   - if [[ -n $EMACS_VERSION ]]; then emacs --version; fi
