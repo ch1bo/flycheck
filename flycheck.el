@@ -6232,7 +6232,8 @@ See URL `http://clang.llvm.org/'."
               (or (flycheck-error-message err) "no message")))
       (flycheck-fold-include-levels errors "In file included from")))
   :modes (c-mode c++-mode)
-  :next-checkers ((warning . c/c++-cppcheck)))
+  :next-checkers ((warning . c/c++-clang-tidy)
+                  (warning . c/c++-cppcheck)))
 
 (flycheck-def-args-var flycheck-gcc-args c/c++-gcc
   :package-version '(flycheck . "0.22"))
